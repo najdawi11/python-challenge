@@ -1,18 +1,18 @@
 import os
 import csv
 
-# Function: print a line of 20 caracteres like this "-"
+
 
 def print_line():
-
+#print a line of 20
     line = "-"
     for i in range(20):
         line = line + "-"
     return line
 
 
-# Function: write the result data in a file
 
+#write  result data in  file
 def print_in_file(print_Data):
     
     resulting = os.path.join("analysis", "PyPoll_result.txt")
@@ -20,13 +20,10 @@ def print_in_file(print_Data):
     with open(resulting, "w") as f:
         f.write("\n".join(print_Data))
 
-# Function: print the result calculation of voting data 
-
-# Function: print the result calculation of voting data 
-
+#print the result for voting
 def print_Results(numRows,sumAmount,max_change,min_change,data):
 
-    # build array to print on file
+    #build array to print file
     print_Data = []
 
     change_Amount_Sum = 0
@@ -57,7 +54,7 @@ def print_Results(numRows,sumAmount,max_change,min_change,data):
     print(print_line())
     print_Data.append(print_line())
     
-    # write the results in file        
+    #write the results in file  
     print_in_file(print_Data)
 
 
@@ -68,7 +65,7 @@ with open(budget_csv) as csvfile:
 
     csv_reader = csv.reader(csvfile, delimiter=',')
 
-    # read the header 
+    #read the header 
     header = next(csv_reader)
 
     data = []
@@ -87,11 +84,11 @@ with open(budget_csv) as csvfile:
 
             below_amount = float(row[1])
 
-            max_change.append(row[0]) # append date
-            max_change.append(float(row[1])) # append amount
+            max_change.append(row[0]) #append date
+            max_change.append(float(row[1])) #append amount
 
-            min_change.append(row[0]) # append date
-            min_change.append(float(row[1])) # append amount
+            min_change.append(row[0]) #append date
+            min_change.append(float(row[1])) #append amount
 
             sum_total_Amount += float(row[1])
 
@@ -102,13 +99,14 @@ with open(budget_csv) as csvfile:
 
         #greatest increase 
         if max_change[1] < float(row[1])-below_amount:
-            max_change[1] = float(row[1])-below_amount # hold new amount
-            max_change[0] = row[0] # hold new date
+            max_change[1] = float(row[1])-below_amount #hold new amount
+            max_change[0] = row[0] #hold new date
+
 
         #greatest decrease 
         if min_change[1] > float(row[1])-below_amount:
-            min_change[1] = float(row[1])-below_amount # hold new amount
-            min_change[0] = row[0] # hold new date
+            min_change[1] = float(row[1])-below_amount #hold new amount
+            min_change[0] = row[0] #hold new date
 
         below_amount = float(row[1])
         rownumber += 1
